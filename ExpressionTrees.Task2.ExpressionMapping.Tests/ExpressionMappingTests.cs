@@ -9,12 +9,31 @@ namespace ExpressionTrees.Task2.ExpressionMapping.Tests
         // todo: add as many test methods as you wish, but they should be enough to cover basic scenarios of the mapping generator
 
         [TestMethod]
-        public void TestMethod1()
+        public void TestMethod_AssignedFooProperties()
         {
+
+            var foo = new Foo() { Name = "Test", Age = 20 };
             var mapGenerator = new MappingGenerator();
             var mapper = mapGenerator.Generate<Foo, Bar>();
 
-            var res = mapper.Map(new Foo());
+            var boo = mapper.Map(foo);
+
+            Assert.AreEqual(boo.Name, foo.Name);
+            Assert.AreEqual(boo.Age, foo.Age);
+        }
+
+        [TestMethod]
+        public void TestMethod_UnassignedFooProperties()
+        {
+
+            var foo = new Foo();
+            var mapGenerator = new MappingGenerator();
+            var mapper = mapGenerator.Generate<Foo, Bar>();
+
+            var boo = mapper.Map(foo);
+
+            Assert.AreEqual(boo.Name, foo.Name);
+            Assert.AreEqual(boo.Age, foo.Age);
         }
     }
 }
